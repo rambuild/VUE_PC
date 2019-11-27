@@ -60,7 +60,6 @@ export default {
                      message: "登陆成功！",
                      center: true
                   });
-                  console.log(res)
                   window.sessionStorage.setItem('token',res.data.data.token);
                   this.$router.push('/home')
                } else {
