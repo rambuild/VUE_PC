@@ -6,10 +6,10 @@
          </div>
          <div class="form_box">
             <el-form label-width="0" :model="form" :rules="formRules" ref="loginBox">
-               <el-form-item label prop="user">
+               <el-form-item label='' prop="user">
                   <el-input prefix-icon="iconfont icon-user" v-model="form.user" type="text"></el-input>
                </el-form-item>
-               <el-form-item label prop="pwd">
+               <el-form-item label='' prop="pwd">
                   <el-input prefix-icon="iconfont icon-3702mima" v-model="form.pwd" type="password"></el-input>
                </el-form-item>
                <el-form-item class="btn_box">
