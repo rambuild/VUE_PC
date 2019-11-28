@@ -12,18 +12,27 @@
       <!-- 内容区域 -->
       <el-container>
          <!-- 侧边栏 -->
-         <el-aside width="220px">
+         <el-aside :width="isCollapse?'64px':'200px'">
+            <div class="toggle_btn" @click="toggleCollapse">
+               <span>|||</span>
+            </div>
             <el-menu
                background-color="rgb(53, 57, 70)"
                text-color="#fff"
                active-text-color="rgb(66,157,255)"
+               unique-opened
+               :collapse="isCollapse"
+               :collapse-transition="false"
+               router
             >
                <el-submenu :index="i.id+''" v-for="i in menuList" :key="i.id">
                   <template slot="title">
-                     <i :class="fontObj[i.id]"></i>
-                     <span slot="title">{{ i.authName }}</span>
+                     <div class="menu_info">
+                        <i :class="fontObj[i.id]"></i>
+                        <span slot="title">{{ i.authName }}</span>
+                     </div>
                   </template>
-                  <el-menu-item :index="j.id+''" v-for="j in i.children" :key="j.id">
+                  <el-menu-item :index="'/'+j.path" v-for="j in i.children" :key="j.id">
                      <template slot="title">
                         <i class="el-icon-menu"></i>
                         <span>{{ j.authName }}</span>
@@ -34,7 +43,9 @@
          </el-aside>
 
          <!-- 右侧内容区域 -->
-         <el-main>Main</el-main>
+         <el-main>
+            <router-view></router-view>
+         </el-main>
       </el-container>
    </el-container>
 </template>
@@ -43,14 +54,14 @@
 export default {
    data() {
       return {
-         isCollapse: true,
+         isCollapse: false,
          menuList: [],
-         fontObj:{
-             "125":"icon-font icon-user",
-             "103":"icon-font icon-tijikongjian",
-             "101":"icon-font icon-shangpin",
-             "102":"icon-font icon-danju",
-             "145":"icon-font icon-baobiao",
+         fontObj: {
+            "125": "iconfont icon-user",
+            "103": "iconfont icon-tijikongjian",
+            "101": "iconfont icon-shangpin",
+            "102": "iconfont icon-danju",
+            "145": "iconfont icon-baobiao"
          }
       };
    },
@@ -79,6 +90,9 @@ export default {
                center: true
             });
          this.menuList = res.data;
+      },
+      toggleCollapse() {
+         this.isCollapse = !this.isCollapse;
       }
    },
    created() {
@@ -119,19 +133,37 @@ export default {
 
 .el-aside {
    background-color: rgb(53, 57, 70);
-   color: #333;
+   color: #fff;
    text-align: center;
-   line-height: 200px;
-   .el-menu-item{
-       font-size: 13px;
-       padding-left: 60px !important;
+   overflow: hidden;
+   .toggle_btn {
+      cursor: pointer;
+      background-color: rgb(74, 82, 100);
+      vertical-align: middle;
+      height: 28px;
+      width: 100%;
+      letter-spacing: 0.1em;
+   }
+   .toggle_btn:hover {
+      background-color: rgb(102, 176, 255);
+   }
+   .el-menu {
+      border-right: none;
+   }
+   .el-menu-item {
+      font-size: 13px;
+      padding-left: 60px !important;
+   }
+   .menu_info {
+      font-size: 17px !important;
+      i {
+         font-size: 20px;
+      }
    }
 }
 
 .el-main {
    background-color: rgb(233, 236, 241);
    color: #333;
-   text-align: center;
-   line-height: 160px;
 }
 </style>

@@ -64,7 +64,7 @@ export default {
                   this.$router.push('/home')
                } else {
                   this.$message.error({
-                     message: "密码错误！",
+                     message: "账号或密码错误！",
                      center:true
                   });
                }
