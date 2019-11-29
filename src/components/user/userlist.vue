@@ -233,8 +233,12 @@ export default {
          const { data: res } = await this.$http.get("users", {
             params: this.queryData
          });
-         this.total = res.data.total;
-         this.userList = res.data.users;
+         if(res.meta.status != 200){
+             this.$message.error({message:"获取用户列表失败！",center:true})
+         }else{
+             this.total = res.data.total;
+             this.userList = res.data.users;
+         }
       },
       handleSizeChange(newPageSize) {
          this.queryData.pagesize = newPageSize;
@@ -316,7 +320,7 @@ export default {
                 }
             })
             .catch(()=>{
-                this.$message.info({message:"删除取消",center:true})
+                this.$message.info({message:"取消删除",center:true})
             })
       },
       settingUserInfo(v){

@@ -67,7 +67,7 @@ export default {
    },
    methods: {
       quit() {
-         this.$confirm('确认退出？',{
+         this.$confirm('确认退出？','提示',{
             type:"warning"
          }).then(()=>{
             window.sessionStorage.clear();
