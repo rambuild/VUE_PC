@@ -67,14 +67,18 @@ export default {
    },
    methods: {
       quit() {
-         window.sessionStorage.clear();
-         this.$router.push("/login");
-         this.$message({
-            type: "success",
-            message: "退出成功！",
-            duration: 1000,
-            center: true
-         });
+         this.$confirm('确认退出？',{
+            type:"warning"
+         }).then(()=>{
+            window.sessionStorage.clear();
+            this.$router.push("/login");
+            this.$message({
+               type: "success",
+               message: "退出成功！",
+               duration: 1000,
+               center: true
+            });
+         })
       },
       handleOpen(key, keyPath) {
          console.log(key, keyPath);
