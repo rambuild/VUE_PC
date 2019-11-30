@@ -44,7 +44,7 @@
                             <el-button type="primary" icon="el-icon-edit" size="mini" @click="settingUserInfo(scope.row)"></el-button>
                             <el-button type="danger" icon="el-icon-delete" size="mini" @click="del_user(scope.row)"></el-button>
                             <el-tooltip content="分配角色" placement="top" :enterable="false">
-                                <el-button type="warning" icon="el-icon-setting" size="mini"></el-button>
+                                <el-button type="warning" icon="el-icon-setting" size="mini" @click="disRoleToggle(scope.row)"></el-button>
                             </el-tooltip>
                         </template>
                     </el-table-column>
@@ -102,6 +102,30 @@
                 <el-button type="primary" @click="settingUserBtn">确 定</el-button>
             </div>
         </el-dialog>
+        <!-- 分配角色的对话框 -->
+        <el-dialog title="分配角色" :visible.sync="disRolesDialogVisible" width="30%" :center="true" @close="disRolesDialogCloseHandle">
+            <p>
+               <span>当前用户：{{disRoles.username}}</span>
+            </p>
+            <p>
+               <span>当前角色：{{disRoles.role_name}}</span>
+            </p>
+            <p>
+               <span>分配新角色：</span>
+               <el-select v-model="selectedRoleId" clearable placeholder="请选择">
+                  <el-option
+                     v-for="item in rolesList"
+                     :key="item.id"
+                     :label="item.roleName"
+                     :value="item.id">
+                  </el-option>
+               </el-select>
+            </p>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="disRolesDialogVisible = false">取 消</el-button>
+                <el-button type="primary" @click="saveDisRolesBtn">确 定</el-button>
+            </div>
+        </el-dialog>
    </div>
 </template>
 
@@ -157,13 +181,17 @@ export default {
          queryData: {
             query: "",
             pagenum: 1,
-            pagesize: 2
+            pagesize: 10
          },
          userList: [],
          value: true,
          total: 0,
+         selectedRoleId:[],
          dialogFormVisible: false,
          userInfoDialogFormVisible:false,
+         disRolesDialogVisible:false,
+         disRoles:{},
+         rolesList:[],
          formLabelWidth: "120px",
          addUser: {
             username: "",
@@ -225,6 +253,9 @@ export default {
                  validator:checkMobile,
                  trigger:'blur'
              }]
+         },
+         disRolesFormRules:{
+            
          }
       };
    },
@@ -309,9 +340,7 @@ export default {
                 type: 'warning'
             })
             .then(async () =>{
-                console.log(v)
                 const { data : res } = await this.$http.delete(`users/${v.id}`)
-                console.log(res)
                 if(res.meta.status == 200 ){
                     this.$message.success({message:`删除用户：${v.username} 成功!`,center:true})
                     this.getUserList()
@@ -324,7 +353,6 @@ export default {
             })
       },
       settingUserInfo(v){
-          console.log(v)
           this.settingUser = {
               username:v.username,
               email:v.email,
@@ -354,6 +382,39 @@ export default {
                 this.userInfoDialogFormVisible = false
            }
         })
+      },
+      disRolesDialogCloseHandle(){
+
+      },
+      async disRoleToggle(scope){
+         this.disRolesDialogVisible = true
+         this.disRoles = {
+            username:scope.username,
+            role_name:scope.role_name,
+            roleId:scope.id
+         }
+         const {data : res} = await this.$http.get('roles')
+         if(res.meta.status !==200){
+            return this.$message.error({message:res.meta.msg,center:true})
+         }else{
+            this.rolesList = res.data
+         }
+      },
+      async saveDisRolesBtn(){
+         if(!this.selectedRoleId){
+            return this.$message.error({message:"请选择需要分配的用户角色！",center:true})
+         }else{
+            const {data :res} = await this.$http.put(`users/${this.disRoles.roleId}/role`,{
+               rid:this.selectedRoleId
+            })
+            if(res.meta.status != 200){
+               return this.$message.error({message:res.meta.msg,center:true})
+            }else{
+               this.$message.success({message:res.meta.msg,center:true})
+               this.getUserList()
+               this.disRolesDialogVisible = false
+            }
+         }
       }
    },
    mounted() {
@@ -374,6 +435,12 @@ export default {
    margin-top: 20px;
 }
 .el-form-item {
-   padding-right: 70px;
+   padding-right: 50px;
+}
+.disform{   
+   .el-form-item {
+      padding-right: 50px;
+      margin-bottom: 0;
+   }
 }
 </style>

@@ -9,3 +9,12 @@ html,
 .el-table td, .el-table th.is-leaf{
     text-align: center;
 }
+
+.disform .el-form-item__label{    
+    text-align: left !important;   
+    width: 85px !important; 
+ 
+ }
+ .disform .el-form-item__content{
+     margin-left: 85px !important;
+ }

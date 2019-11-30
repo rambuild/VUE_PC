@@ -221,7 +221,6 @@ export default {
             checkedNodes.forEach(i=>{
                 this.queryRights.push(i.id)
             })
-            console.log(this.queryRights)
             const {data : res} =await this.$http.post(`roles/${this.roleID}/rights`,{
                 rids:this.queryRights.join(',')
             })            
@@ -237,6 +236,7 @@ export default {
         },
         async setRights(scope){
             this.showSetRightsDialog = true
+            // 点击编辑权限将当前ID暂存到roleID里
             this.roleID = scope.id
             const {data : res} = await this.$http.get('rights/tree')
             if(res.meta.status != 200 ){
@@ -253,6 +253,7 @@ export default {
             }
         },
         editRoleInfoDialogCloseHandle(){
+            // 关闭编辑权限对话框时将defCheckRights的值置空
             this.defCheckRights = []
         }
     },

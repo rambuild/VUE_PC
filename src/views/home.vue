@@ -93,6 +93,7 @@ export default {
                message: res.meta.msg,
                center: true
             });
+            console.log(res)
          this.menuList = res.data;
       },
       toggleCollapse() {

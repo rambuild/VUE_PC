@@ -61,6 +61,7 @@ export default {
                      center: true
                   });
                   window.sessionStorage.setItem('token',res.data.data.token);
+                  window.sessionStorage.setItem('username',res.data.data.username)
                   this.$router.push('/home')
                } else {
                   this.$message.error({
