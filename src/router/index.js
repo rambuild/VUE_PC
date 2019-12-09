@@ -23,6 +23,12 @@ const router = new Router({
         },{
           path:'/roles',
           component:() => import('@/components/rights/roleslist')
+        },{
+          path:'/categories',
+          component:() => import('@/components/goods/categories')
+        },{
+          path:'/params',
+          component:() => import('@/components/goods/goodsParams')
         }
       ]
     }

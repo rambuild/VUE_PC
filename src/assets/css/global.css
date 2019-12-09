@@ -16,5 +16,21 @@ html,
  
  }
  .disform .el-form-item__content{
-     margin-left: 85px !important;
+    margin-left: 85px !important;
  }
+ .el-submenu__title:hover{
+    background-color: rgb(102,176,255) !important;
+ }
+ .el-menu-item:hover{
+    background-color: rgb(102,176,255) !important;
+ } 
+.el-card {
+   margin-top: 18px;
+   box-shadow: 0 0 5px #666;  
+}
+.el-card .text {
+   margin: 0 0 20px 0;
+}
+.el-card .el-table{
+   border-radius: 5px;
+}
