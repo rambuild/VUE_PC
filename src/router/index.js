@@ -29,6 +29,12 @@ const router = new Router({
         },{
           path:'/params',
           component:() => import('@/components/goods/goodsParams')
+        },{
+          path:'/goods',
+          component:() => import('@/components/goods/goods')
+        },{
+          path:'/goods/addgoods',
+          component:() => import('@/components/goods/addgoods')
         }
       ]
     }

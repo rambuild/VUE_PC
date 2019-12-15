@@ -129,7 +129,9 @@ export default {
             onlyParamsList:[],
             isDisabled:true,
             activeTabsName:'many',
-            addParams:{},
+            addParams:{
+                attr_name:''
+            },
             editParams:{
                 attr_name:''
             },

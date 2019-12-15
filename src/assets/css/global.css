@@ -34,3 +34,6 @@ html,
 .el-card .el-table{
    border-radius: 5px;
 }
+.el-step__title{
+    font-size: 13px;
+}
