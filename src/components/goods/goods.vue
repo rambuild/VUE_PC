@@ -20,7 +20,7 @@
                     </el-col>
                 </el-row> 
             </div>
-             <!-- 商品列表区域 -->
+            <!-- 商品列表区域 -->
             <template>
                 <el-table :data="goodsList" border stripe style="width: 100%" class="goodsTable">
                     <el-table-column type="index" label="#"></el-table-column>
@@ -146,9 +146,7 @@ export default {
             }else{
                 this.goodsList = res.data.goods
                 this.total = res.data.total
-                this.$message.success({ message:res.meta.msg,center:true })
             }
-            console.log(res)
         },
         handleSizeChange(size){
            this.queryData.pagesize = size
@@ -158,14 +156,15 @@ export default {
             this.queryData.pagenum = num
             this.getGoodsList()
         },
-        editGoodsMethods(scope){
+        async editGoodsMethods(scope){
             this.editGoodsDialogFormVisible = true;
             this.editGoods = {
+                id:scope.goods_id,
                 goods_name:scope.goods_name,
                 goods_price:scope.goods_price,
                 goods_number:scope.goods_number,
                 goods_weight:scope.goods_weight,
-                goods_id:scope.goods_id
+                goods_introduce:scope.goods_introduce
             }
         },
         addGoodsMethods(){
@@ -201,12 +200,7 @@ export default {
 
         },
         async editGoodsBtn(){
-            const {data :res} = await this.$http.put(`goods/${this.editGoods.goods_id}`,{
-                goods_name:this.editGoods.goods_name,
-                goods_price:this.editGoods.goods_price,
-                goods_number:this.editGoods.goods_number,
-                goods_weight:this.editGoods.goods_weight
-            })
+            const {data :res} = await this.$http.put(`goods/${this.editGoods.id}`,this.editGoods)
             console.log(res)
         }
     },

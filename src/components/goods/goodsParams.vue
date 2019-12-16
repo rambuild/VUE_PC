@@ -15,7 +15,7 @@
                 :closable="false">
             </el-alert>
             <p>
-                <span style="font-size:20px;">选择商品分类：</span> 
+                <span style="font-size:18px;">选择商品分类：</span> 
                 <!-- 级联选择器 -->
                 <el-cascader
                      v-model="selected_options"

@@ -35,6 +35,9 @@ const router = new Router({
         },{
           path:'/goods/addgoods',
           component:() => import('@/components/goods/addgoods')
+        },{
+          path:'/orders',
+          component:() => import('@/components/orders/orders')
         }
       ]
     }
