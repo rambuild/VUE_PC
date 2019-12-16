@@ -22,7 +22,7 @@
                 <el-table :data="orderList" border stripe style="width: 100%" class="goodsTable">
                     <el-table-column type="index" label="#"></el-table-column>
                     <el-table-column prop="goods_name" label="订单编号" class="goodsNameTable"></el-table-column>
-                    <el-table-column prop="goods_price" label="订单价格"></el-table-column>
+                    <el-table-column pr op="goods_price" label="订单价格"></el-table-column>
                     <el-table-column prop="goods_weight" label="是否付款">
                         <template slot-scope="scope">
                             <el-tag type="success">已付款</el-tag>
