@@ -1,4 +1,4 @@
-<<template>
+<template>
     <div>        
         <!-- 面包屑导航 -->
         <el-breadcrumb separator-class="el-icon-arrow-right">
@@ -36,7 +36,6 @@ export default {
    methods:{
        async getRightsList(){
            const {data : res} = await this.$http.get('rights/list')
-           console.log(res)
            if(res.meta.status !== 200){
                return this.$message.error({
                    message:"获取权限列表失败！",

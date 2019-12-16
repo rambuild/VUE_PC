@@ -15,7 +15,7 @@ import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
 
-Vue.use(axios)
+// Vue.use(axios)
 Vue.use(elementUI)
 Vue.use(VueQuillEditor)
 

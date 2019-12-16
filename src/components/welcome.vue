@@ -1,4 +1,4 @@
-<<template>
+<template>
     <div>
         <h1>welcome：{{username}}</h1>
     </div>
