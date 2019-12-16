@@ -38,6 +38,9 @@ const router = new Router({
         },{
           path:'/orders',
           component:() => import('@/components/orders/orders')
+        },{
+          path:'/reports',
+          component:() => import('@/components/reports/reports')
         }
       ]
     }
