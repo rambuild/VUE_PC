@@ -194,7 +194,7 @@ export default {
             }
         },
         editCatgDialogCloseHandle(){
-            this.refs.editCatgForm.resetFields()
+            this.$refs.editCatgForm.resetFields()
         },
         handleChange(v){
              // 级联选择的值发生改变就收起级联框

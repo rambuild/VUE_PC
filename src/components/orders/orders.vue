@@ -92,7 +92,6 @@
                     <el-timeline-item
                     v-for="(i, index) in transInfo"
                     :key="index"
-                    :size="i.size"
                     icon='el-icon-location'
                     size='large'
                     placement='top'
@@ -192,7 +191,6 @@ export default {
                 return this.$message.error({ message:res.meta.message,center:true })
             }else{
                 this.transInfo = res.data
-                console.log(res)
                 this.$message.success({ message:res.meta.message,center:true })
             }
         },
