@@ -20,7 +20,7 @@ Vue.use(elementUI)
 Vue.use(VueQuillEditor)
 
 Vue.component('tree-table',treeTable)
-axios.defaults.baseURL = 'http://100.64.189.195:8888/api/private/v1'
+axios.defaults.baseURL = 'http://127.0.0.1:8888/api/private/v1'
 Vue.prototype.$http = axios
 axios.interceptors.request.use(config => {
   config.headers.Authorization = window.sessionStorage.getItem('token')
