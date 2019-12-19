@@ -6,6 +6,8 @@ import 'element-ui/lib/theme-chalk/index.css'
 import axios from 'axios'
 import treeTable from 'vue-table-with-tree-grid'
 import VueQuillEditor from 'vue-quill-editor'
+// 展示进度条
+import NProgress from 'nprogress'
 Vue.config.productionTip = false
 
 /*全局样式 */
@@ -14,6 +16,7 @@ import '@/assets/css/iconfont.css'
 import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
+import 'nprogress/nprogress.css'
 
 // Vue.use(axios)
 Vue.use(elementUI)
@@ -24,6 +27,11 @@ axios.defaults.baseURL = 'http://127.0.0.1:8888/api/private/v1'
 Vue.prototype.$http = axios
 axios.interceptors.request.use(config => {
   config.headers.Authorization = window.sessionStorage.getItem('token')
+  NProgress.start()
+  return config
+})
+axios.interceptors.response.use(config => {
+  NProgress.done()
   return config
 })
 Vue.filter('dateFormat',function(dataStr){
